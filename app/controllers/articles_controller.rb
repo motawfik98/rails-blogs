@@ -16,7 +16,8 @@ class ArticlesController < ApplicationController
     else
       render json: {
         message: "bad request, invalid format",
-        status: 400
+        status: 400,
+        errors: article.errors,
       }
     end
   end
