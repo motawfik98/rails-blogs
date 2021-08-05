@@ -35,6 +35,21 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    article = Article.find(params[:id])
+    if article.destroy
+      render json: {
+        status: 200,
+        message: "Success"
+      }
+    else
+      render json: {
+        status: 500,
+        message: "Unexpected error"
+      }
+    end
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :body)
