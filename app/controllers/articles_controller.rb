@@ -22,6 +22,19 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def update
+    article = Article.find(params[:id])
+    if article.update(article_params)
+      render json: article
+    else
+      render json: {
+        message: "bad request, invalid format",
+        status: 400,
+        errors: article.errors,
+      }
+    end
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :body)
